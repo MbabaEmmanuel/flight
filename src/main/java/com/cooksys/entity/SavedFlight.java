@@ -1,22 +1,51 @@
-package com.cooksys.pojo;
+package com.cooksys.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
-public class Flight {
+@Entity
+public class SavedFlight {
 	
+	@Id
+	@GeneratedValue
+	private Integer id;
+	
+	@Column
 	//Name of city where flight originates
 	private String origin;
 	
+	@Column
 	//Name of city where flight lands
 	private String destination;
 	
+	@Column
 	//How many hours flight is in the air
 	private long flightTime;
 	
+	@Column(name = "off")
 	//How many hours after the start of the day until the flight takes off
 	private long offset;
+	
+	@JsonIgnore
+	@ManyToOne(optional = false)
+	private Itinerary itinerary;
+	
+	
+	
+	public SavedFlight() {
+		super();
+	}
+
+
+	public SavedFlight(String origin, String destination, long flightTime, long offset) {
+		super();
+		this.origin = origin;
+		this.destination = destination;
+		this.flightTime = flightTime;
+		this.offset = offset;
+	}
+	
 	
 	public String getOrigin() {
 		return origin;
@@ -42,19 +71,11 @@ public class Flight {
 	public void setOffset(long offset) {
 		this.offset = offset;
 	}
-	public Flight(String origin, String destination, long flightTime, long offset) {
-		super();
-		this.origin = origin;
-		this.destination = destination;
-		this.flightTime = flightTime;
-		this.offset = offset;
-	}
-	public Flight() {
-		
-	}
+
 	
 	
-	
-	
+
+
+
 
 }

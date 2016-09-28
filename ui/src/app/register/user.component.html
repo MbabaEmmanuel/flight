@@ -1,0 +1,84 @@
+
+<h1> hello</h1>
+
+<md-card>
+  <md-card-title>
+    <md-card-title-text>
+      <span class="md-headline">Search Flights!</span>
+      <span class="md-subhead">Where would you like to go?</span>
+    </md-card-title-text>
+  </md-card-title>
+
+  <md-card-content>
+    <div layout="row">
+      <md-input-container>
+        <label>Origin</label>
+        <input type="text" ng-model="userCtrl.flight.origin">
+      </md-input-container>
+
+      <md-input-container>
+        <label>Destination</label>
+        <input type="text" ng-model="userCtrl.flight.destination">
+      </md-input-container>
+
+
+      <md-button class="md-raised md-primary" aria-label="Profile"  ng-click= userCtrl.searchFlight()>
+        Search!
+             <md-icon><i class="fa fa-user-plus fa-2x" aria-hidden="true"></i></md-icon>
+         </md-button>
+
+
+         <md-button class="md-raised md-primary" aria-label="Profile"  ng-click= userCtrl.getItinerary()>
+           Get Past Itinerary
+                <md-icon><i class="fa fa-user-plus fa-2x" aria-hidden="true"></i></md-icon>
+            </md-button>
+         </div>
+
+         <a>
+          <md-list-item class="md-3-line" ng-repeat="b in itineraries">
+            <md-list-item class="md-3-line" ng-repeat="item in b" >
+              <tr ng-repeat="flight in item" class="info" ng-click="userCtrl.newItinerary(flight)">
+            <div class="md-list-item-text" layout="column">
+          {{flights.flight}}
+          </div>
+          </md-list-item>
+        </a>
+
+
+        <br><br><a>
+        <md-list-item class="md-3-line" ng-repeat="flightList in flights" ng-click="null">
+          <div class="md-list-item-text" layout="column">
+
+            <md-list-item class="md-3-line" ng-repeat="item in flightList" >
+              <div class="table-responsive">
+                  <table class="table table-bordered">
+                      <thead>
+                      <tr class="success">
+                          <th>Origin</th>
+                          <th>Destination</th>
+                          <th>Flight Duration</th>
+
+                      </tr>
+                      </thead>
+                      <tbody>
+                <tr ng-repeat="flight in item" class="info" ng-click="userCtrl.newItinerary(flight)">
+                  <td>{{flight.origin}}</td>
+                  <td>{{flight.destination}}</td>
+                  <td>{{flight.flightTime}}</td>
+
+                </tr>
+              </tbody>
+             </table>
+               </div>
+            </md-list-item>
+                          </div>
+          </md-list-item>
+      </a>
+
+
+
+
+
+
+  </md-card-content>
+</md-card>

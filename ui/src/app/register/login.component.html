@@ -1,0 +1,27 @@
+<div>
+<h1>Sign in!</h1>
+
+<div  layout="row">
+<div layout="row" layout-align="space-around center" flex>
+ <md-input-container>
+ <label>Username</label>
+ <input type="text" ng-model="loginCtrl.user.userName" color = white >
+</md-input-container>
+</div>
+
+
+<div>
+ <md-input-container>
+ <label>Password</label>
+ <input type="text" ng-model="loginCtrl.user.password" color = white >
+</md-input-container>
+</div>
+
+</div>
+
+<md-button class="md-raised md-primary" aria-label="Profile"  ng-click= loginCtrl.getUser()>
+  Sign In!
+       <md-icon><i class="fa fa-user-plus fa-2x" aria-hidden="true"></i></md-icon>
+   </md-button>
+
+ </div>

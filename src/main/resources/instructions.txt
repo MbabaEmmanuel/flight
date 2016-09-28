@@ -4,7 +4,7 @@ The intent of this project is to create an interface for users to book flights.
 
 The idea of a flight is greatly simplified from reality.
 
-In this world, the flights will only go to four cities: Orlando, Miami, Tallahassee, and Jacksonville
+In this world, the flights will only go to four cities: Memphis, Knoxville, Nashville, and Chattanooga
 
 A new set of five flights is generated every "day"
 
@@ -12,7 +12,7 @@ A day is defined in the FlightService
 
 A day lasts as long as the @Scheduled annotation indicates, feel free to change this value to assist in your testing
 
-A flight has a origin, destination, flight time, and offset
+A flight has a origin, destination, flight time, and offset 
 
 The origin is the city the flight departs from
 
@@ -35,11 +35,11 @@ Execute the contents of location.sql to populate the locations table
 
 Create a website where any visitor can see the up to date list of available flights
 
-The list of available flights must updated in real time
+The list of available flights must updated in real time*
 
 Allow a user to create a profile and log in to that profile
 
-If a user logs in, allow them to search for flights between an origin and destination city
+If a user logs in, allow them to search for flights between an origin and destination city**
 
 The results of this search must be updated in real time
 

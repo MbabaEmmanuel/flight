@@ -1,5 +1,6 @@
 import templateUrl from './map.component.html'
 
+
 /* @ngInject */
 class MapController {
   zoom = 7
@@ -30,6 +31,8 @@ class MapController {
         this.addPath(knoxville, chattanooga, '#FF3388')
       })
   }
+
+  
 
   addMarker ({ latitude, longitude }) {
     this.markers.push({

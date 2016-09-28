@@ -1,0 +1,32 @@
+<div>
+<h1>REGISTER!</h1>
+
+<div>
+ <md-input-container>
+ <label>Username</label>
+ <input type="text" ng-model="registerCtrl.user.userName" color = white >
+</md-input-container>
+</div>
+
+
+<div>
+ <md-input-container>
+ <label>Password</label>
+ <input type="text" ng-model="registerCtrl.user.password" color = white >
+</md-input-container>
+</div>
+
+<div>
+ <md-input-container>
+ <label>*Verify</label>
+ <input type="text" ng-model="registerCtrl.user.password" color = white >
+</md-input-container>
+</div>
+
+</div>
+<a ui-sref="home">
+<md-button class="md-raised md-primary" aria-label="Profile"  ng-click= registerCtrl.newUser()>
+  Register
+       <md-icon><i class="fa fa-user-plus fa-2x" aria-hidden="true"></i></md-icon>
+   </md-button>
+</a>
