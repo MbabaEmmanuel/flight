@@ -2,6 +2,7 @@ package com.cooksys.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -51,9 +52,12 @@ public class UserController {
 	}
 	
 	@RequestMapping(value = {"itinerary/{id}"}, method=RequestMethod.POST)
-	public Itinerary createItinerary(@PathVariable Integer id, @RequestBody List<Integer> flightId) {
-		return this.service.createFlight(id, flightId);
+	public Itinerary createItinerary(@PathVariable Integer id, @RequestBody List<SavedFlight> flights) {
+		return this.service.createFlight(id, flights);
 	}
+	
+	
+	
 	
 	@RequestMapping(method=RequestMethod.POST)
 	public User postUser(@RequestBody User user) {

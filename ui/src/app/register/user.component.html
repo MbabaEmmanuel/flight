@@ -34,13 +34,36 @@
             </md-button>
          </div>
 
-         <a>
-          <md-list-item class="md-3-line" ng-repeat="b in itineraries">
-            <md-list-item class="md-3-line" ng-repeat="item in b" >
-              <tr ng-repeat="flight in item" class="info" ng-click="userCtrl.newItinerary(flight)">
+         <br><br><a>
+          <md-list-item class="md-3-line" ng-repeat="object in itineraries" >
             <div class="md-list-item-text" layout="column">
-          {{flights.flight}}
-          </div>
+            <md-list-item class="md-3-line" ng-repeat="flights in object" >
+              <div class="table-responsive">
+                  <table class="table table-bordered">
+                  <table class="table table-bordered">
+                      <thead>
+                      <tr class="success">
+                          <th>Origin</th>
+                          <th>Destination</th>
+                          <th>Flight Duration</th>
+                          <th>Flight Time</th>
+
+                      </tr>
+                      </thead>
+                      <tbody>
+
+            <tr ng-repeat="obj in flights" class="info" ng-click="userCtrl.mapItinerary(object)">
+                <td>{{obj.origin}}</td>
+                <td>{{obj.destination}}</td>
+                <td>{{obj.flightTime}}</td>
+                <td>{{obj.offset}}</td>
+
+          </tr>
+        </tbody>
+       </table>
+       </div>
+            </md-list-item>
+              </div>
           </md-list-item>
         </a>
 
@@ -57,6 +80,7 @@
                           <th>Origin</th>
                           <th>Destination</th>
                           <th>Flight Duration</th>
+                          <th>Flight Time</th>
 
                       </tr>
                       </thead>
@@ -65,7 +89,7 @@
                   <td>{{flight.origin}}</td>
                   <td>{{flight.destination}}</td>
                   <td>{{flight.flightTime}}</td>
-
+                  <td>{{flight.offset}}</td>
                 </tr>
               </tbody>
              </table>

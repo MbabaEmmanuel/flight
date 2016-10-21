@@ -5,6 +5,7 @@ import routes from './app.routes'
 import homeAp from './home/home.module'
 import registerApp from './register/register.module'
 import bcrypt from 'bcryptjs'
+import map from './mapstuff/mapstuff.module.js'
 
 export default
   angular
@@ -16,7 +17,8 @@ export default
       'ui.router',
       homeAp,
       registerApp,
-      flightMap
+      flightMap,
+      map
     ])
     .constant('apiUrl', apiUrl)
     .component('flightApp', appComponent)

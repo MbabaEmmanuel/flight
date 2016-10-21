@@ -1,46 +1,43 @@
 package com.cooksys.entity;
 
+import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.*;
 
-
-import com.cooksys.pojo.Flight;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-@Table(uniqueConstraints = @UniqueConstraint(columnNames = "id"))
-public class Itinerary {
-	@Id
-	@SequenceGenerator(name="user_id_seq", sequenceName="user_id_seq", allocationSize=1)
-	@GeneratedValue(strategy=GenerationType.IDENTITY, generator="user_id_seq")
-	@Column (updatable=false)
+@Table
+public class Itinerary  {
+	
+    @Id
+    @SequenceGenerator(name = "itinerary_id_seq", sequenceName = "itinerary_id_seq", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "itinerary_id_seq")
+    @Column(updatable = false)
 	private Integer id;
 	
 	@ManyToOne(fetch=FetchType.EAGER)
-	@JoinColumn
+	@JsonIgnore
 	private User user;
 	
-	@Column
-	@ManyToMany(mappedBy= "itinerary", fetch=FetchType.EAGER, cascade = CascadeType.ALL)
+
+	@OneToMany(mappedBy = "itinerary", fetch = FetchType.EAGER,cascade = CascadeType.ALL)
 	private List<SavedFlight> flights;
 	
-	
+
 
 	public Itinerary() {
 		super();
 	}
 
 
-	public Itinerary(User userFlight, List<SavedFlight> flight) {
+	public Itinerary(User user, List<SavedFlight> flights) {
 		super();
-		this.user = userFlight;
-		this.flights =  flight;
+		this.user = user;
+		this.flights = flights;
 	}
 
-
-	public Itinerary(List<SavedFlight> savedFlight) {
-		this.flights = savedFlight;
-	}
 
 
 	public Integer getId() {
@@ -67,6 +64,9 @@ public class Itinerary {
 		this.flights = flights;
 	}
 	
+	public void setFlight(SavedFlight flights) {
+		this.flights.add(flights);
+	}
 	
 	
 

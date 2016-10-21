@@ -2,6 +2,7 @@ package com.cooksys.entity;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -31,8 +32,7 @@ public class User {
 	@Column
 	private String password;
 	
-//	@JsonIgnore
-	@OneToMany(fetch=FetchType.EAGER)
+	@OneToMany(mappedBy = "user" ,fetch=FetchType.EAGER,cascade = CascadeType.ALL)
 	private List<Itinerary> itinerary;
 	
 	
@@ -77,8 +77,8 @@ public class User {
 		return itinerary;
 	}
 
-	public void setItinerary(List<Itinerary> itinerary) {
-		this.itinerary = itinerary;
+	public void setItinerary(Itinerary itinerary) {
+		this.itinerary.add(itinerary);
 	}
 
 	

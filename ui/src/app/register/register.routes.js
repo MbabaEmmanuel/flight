@@ -40,6 +40,10 @@ export default function routes ($stateProvider) {
 
 
 })
+.state('mapflight', {
+  url: '/map/:routeid',
+  component: 'mapApp'
+})
 
 
 }

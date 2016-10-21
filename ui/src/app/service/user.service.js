@@ -65,8 +65,8 @@ this.getPastItinerary = function (id){
 return promise;
 }
 
-this.postItinerary = function(id, flight) {
-  return this.$http.post('http://localhost:8000/user/itinerary/' + id, flight)
+this.postItinerary = function(id, flights) {
+  return this.$http.post('http://localhost:8000/user/itinerary/' + id, flights)
 }
 
 

@@ -1,7 +1,9 @@
 package com.cooksys.service;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,40 +18,46 @@ import com.cooksys.repository.UserRepository;
 @Service
 public class UserService {
 
-	@Autowired
-	UserRepository repo;
+	private final UserRepository repo;
 	
-	@Autowired
-	SavedFlightRepository sfRepo;
 	
-	@Autowired
-	ItineraryRepository itRepo;
+	private final SavedFlightRepository sfRepo;
 	
-		
+	
+	private final ItineraryRepository itRepo;
+	
+	
+	
+	@Autowired	
+	public UserService(UserRepository repo, SavedFlightRepository sfRepo, ItineraryRepository itRepo) {
+		super();
+		this.repo = repo;
+		this.sfRepo = sfRepo;
+		this.itRepo = itRepo;
+	}
+
 	public List<User> getAll()
 	{
 
-		return repo.findAll();
+		return this.repo.findAll();
 		
 	}
 	
 	public User read(Integer id)
 	{
-		return repo.findOne(id);
+		return this.repo.findOne(id);
 	}
 
 
 
-	public List<Itinerary> indexItinerary(Integer id) {
-		return itRepo.findByUserId(id);
-	}
+
 
 	public User createUser(User user) {
-		return repo.save(user);
+		return this.repo.save(user);
 	}
 
 	public List<SavedFlight> findFlight(SavedFlight flightsearch) {
-		List<SavedFlight> savedList = sfRepo.findAll();
+		List<SavedFlight> savedList = this.sfRepo.findAll();
 		for(SavedFlight flight: savedList){
 			if(flight.getDestination() != flightsearch.getDestination()){
 				savedList.remove(flight);
@@ -64,26 +72,43 @@ public class UserService {
 		
 
 	public List<SavedFlight> getAllFlights() {
-		return sfRepo.findAll();
+		return this.sfRepo.findAll();
 	}
 
 	
+	public Itinerary saveItinerary(Itinerary itinerary){
+		return this.itRepo.save(itinerary);
+	}
 
-
-	public Itinerary createFlight(Integer id, List<Integer> flightId) 
+	public Itinerary createFlight(Integer id, List<SavedFlight> flights) 
 		{
 			
-			List <SavedFlight> flights = new ArrayList<>();
-			for(Integer i: flightId){
-				flights.add(sfRepo.findById(i));
+		User userItinupdate = this.repo.findOne(id);
+		Itinerary itinerary = new Itinerary();
+		this.itRepo.saveAndFlush(itinerary);
+		for(SavedFlight flight: flights){
+			flight.setItinerary(itinerary);
+			this.sfRepo.saveAndFlush(flight);
 			}
-			
-			Itinerary itin = new Itinerary();
-				itin.setFlights(flights);
-				repo.findById(id).getItinerary().add(itin);
-				return itin;
+		itinerary.setUser(userItinupdate);
+		itinerary.setFlights(flights);
+		
+		userItinupdate.getItinerary().add(itinerary);
+		
+		this.repo.saveAndFlush(userItinupdate);
+		return itinerary;
+		
+		
 			
 		}
+
+	public List<Itinerary> indexItinerary(Integer id) {
+		User useritin = this.read(id);
+		return useritin.getItinerary();
+		
+	}
+
+	
 
 
 

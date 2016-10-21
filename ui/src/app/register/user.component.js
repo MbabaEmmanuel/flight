@@ -11,17 +11,27 @@ class UserController {
     ctrl.user
     ctrl.flight
     ctrl.hi
+    ctrl.obj
 
     ctrl.getItinerary = function () {
 
       userSrvce.getPastItinerary($state.params.id).then(function(promise){
         $scope.itineraries = promise.data
-        console.dir(promise.data)
+        console.dir($scope.itineraries)
       })
     }
 
     ctrl.newItinerary = function (flight) {
-      userSrvce.postItinerary($state.params.id, flight)
+      var flights = []
+      flights.push(flight)
+      userSrvce.postItinerary($state.params.id, flights)
+    }
+
+    ctrl.mapItinerary = function (object){
+
+      console.dir(object.id)
+      $state.go('mapflight', {routeid: object.id})
+
     }
 
 

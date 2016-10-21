@@ -1,16 +1,16 @@
-import mapComponent from './mapstuff.component.js'
-import mapService from './mapstuff.service'
+import mapAp from './mapstuff.component.js'
+import mapService from '../service/mapstuff.service.js'
 
 export default
   angular
-    .module('flight.map', ['ngMap'])
-    .component('flightMap', mapComponent)
-    .service('$map', mapService)
-    .config( $stateProvider
-        .state('mapping', {
-          url: '/mapper/:flight',
-          component: 'userComp'
-        }
-      )
-    )
+    .module('mapAppper', ['ngMap'])
+    .component('mapAp', mapAp)
+    .service('mapService', mapService)
+    .config(['$stateProvider', function ($stateProvider) {
+      $stateProvider
+        .state('map', {
+          url: '/map/:routeid',
+          component: 'mapAp'
+        })
+    }])
     .name

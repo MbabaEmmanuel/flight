@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.*;
 
+import com.cooksys.entity.Itinerary;
 import com.cooksys.repository.ItineraryRepository;
 
 @Service
@@ -20,8 +21,8 @@ public class ItineraryService
 		this.itineraryRepo = itineraryRepo;
 	}
 	
-	public List<ItineraryResponse> index(){
-		return ItineraryResponse.list(this.itineraryRepo.findAll());
+	public Itinerary read(Integer id){
+		return this.itineraryRepo.findOne(id);
 	}
 	
 	

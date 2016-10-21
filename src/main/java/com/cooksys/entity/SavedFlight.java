@@ -28,7 +28,7 @@ public class SavedFlight {
 	private long offset;
 	
 	@JsonIgnore
-	@ManyToOne(optional = false)
+	@ManyToOne(fetch = FetchType.LAZY)
 	private Itinerary itinerary;
 	
 	
@@ -38,15 +38,21 @@ public class SavedFlight {
 	}
 
 
-	public SavedFlight(String origin, String destination, long flightTime, long offset) {
+	
+	
+	public SavedFlight(Integer id, String origin, String destination, long flightTime, long offset) {
 		super();
+		this.id = id;
 		this.origin = origin;
 		this.destination = destination;
 		this.flightTime = flightTime;
 		this.offset = offset;
 	}
-	
-	
+
+
+
+
+
 	public String getOrigin() {
 		return origin;
 	}
@@ -70,6 +76,14 @@ public class SavedFlight {
 	}
 	public void setOffset(long offset) {
 		this.offset = offset;
+	}
+
+	public Itinerary getItinerary() {
+		return itinerary;
+	}
+	
+	public void setItinerary(Itinerary itinerary) {
+		this.itinerary = itinerary;
 	}
 
 	
